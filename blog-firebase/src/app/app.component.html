@@ -2,8 +2,8 @@
 <mat-toolbar color ="primary">
   Blog Demo
   
-  <ng-container *ngIf="authService.currentUser$ | async as user; else loginButton">
-    <button mat-button routerLink="login">
+  <ng-container *ngIf="user$ | async as user; else loginButton">
+    <button mat-button (click)="logout()">
       <mat-icon>logout</mat-icon>
       Logout
   </button>

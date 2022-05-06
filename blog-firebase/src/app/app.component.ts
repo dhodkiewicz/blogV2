@@ -8,6 +8,8 @@ import { AuthenticationService } from './services/authentication.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  user$ = this.authService.currentUser$;
  
   constructor(public authService: AuthenticationService,
     private router: Router){
@@ -16,7 +18,7 @@ export class AppComponent {
 
   logout(){ // upon subscription callback to landing page
     this.authService.logout().subscribe(()=>{
-      this.router.navigate([]);
+      this.router.navigate(['']);
     });
   }
 }

@@ -3,3 +3,7 @@
     margin-left: 8px;
     color:rgb(245, 249, 121);
 }
+
+.form-container{
+    min-width: 250px;
+}
