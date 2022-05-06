@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "blog-angular-1695e": {
+      "hosting": {
+        "blog-firebase": [
+          "blog-angular-1695e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "blog-angular-1695e"
+  }
+}

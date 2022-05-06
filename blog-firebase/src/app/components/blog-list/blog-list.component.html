@@ -1,0 +1,18 @@
+<div id="login-box">
+  <div class="left">
+      <form #RegisterForm="ngForm" (ngSubmit)="registerUser(RegisterForm.value)">
+          <h1>Sign up</h1>
+          <input type="text" ngModel id="username" name="username" placeholder="Username" />
+          <input type="text" ngModel id="first_name" name="first_name" placeholder="First name" />
+          <input type="text" ngModel id="last_name" name="last_name" placeholder="Last name" />
+          <input type="submit" id="saveData" name="signup_submit" value="Sign Up" />
+      </form>
+  </div>
+  <div class="right">
+      <span class="loginwith">Sign in with<br />social network</span>
+      <button class="social-signin facebook">Log in with facebook</button>
+      <button class="social-signin twitter">Log in with Twitter</button>
+      <button class="social-signin google" id='login'>Log in with Google+</button>
+  </div>
+  <div class="or">OR</div>
+</div>
