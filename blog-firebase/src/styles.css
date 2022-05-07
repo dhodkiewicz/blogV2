@@ -1,12 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+       background-image: linear-gradient(to bottom, rgba(47, 223, 197, 0.877), rgb(138, 226, 108)); } 
 
 .form-container{
     display: block;
     max-width: 300px;
-    margin: auto;  /* centers */
+    margin: auto;  /* centered */
 
     background: #5fbbec;
     padding: 48px;
@@ -28,10 +29,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .text-center{
     text-align: center;
-}
-
-body{
-    background-color: rgb(197, 239, 224)!important;
 }
 
 
