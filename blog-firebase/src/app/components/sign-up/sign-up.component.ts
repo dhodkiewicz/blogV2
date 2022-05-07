@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 export function passwordsMatchValidator(): ValidatorFn{
   return(control: AbstractControl): ValidationErrors | null =>{
@@ -30,15 +33,24 @@ export class SignUpComponent implements OnInit {
     confirmPassword: new FormControl('', Validators.required)
   }, { validators: passwordsMatchValidator() }) // A.K.A. cross-field validator (2x fields)
 
-  constructor() { }
+  constructor(private authService: AuthenticationService, private toast: HotToastService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   submit(){
-    if(!this.signUpForm.valid){
-      return;
-    }
+    if(!this.signUpForm.valid) return;
+
+    const { name, email, password } = this.signUpForm.value;
+    this.authService.signUp(name, email, password).pipe(
+      this.toast.observe({
+        success: 'Congrats! You are all signed up',
+        loading: 'Signing up...',
+        error: ({ message }) => `${message}`,
+      })
+    ).subscribe(() => {
+      this.router.navigate(['/home']);
+    })
   }
 
   get email(){

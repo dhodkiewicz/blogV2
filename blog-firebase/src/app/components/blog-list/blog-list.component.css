@@ -17,21 +17,20 @@ body {
 #login-box {
     position: relative;
     margin: 5% auto;
-    width: 600px;
-    height: 400px;
+    width: 400px;
+    height: 430px;
     background: #FFF;
     border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.4);
 }
 
 .left {
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin:auto;
+    text-align:center;
     box-sizing: border-box;
     padding: 40px;
     width: 300px;
-    height: 400px;
+    height: 430px;
 }
 
 h1 {
@@ -40,13 +39,13 @@ h1 {
     font-size: 28px;
 }
 
-input[type="text"],
-input[type="password"] {
+input[type="text"] {
     display: block;
     box-sizing: border-box;
     margin-bottom: 20px;
+    margin-right:10px;
     padding: 4px;
-    width: 220px;
+    width: 260px;
     height: 32px;
     border: none;
     border-bottom: 1px solid #AAA;
@@ -56,8 +55,23 @@ input[type="password"] {
     transition: 0.2s ease;
 }
 
+input[type="textarea"]{
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 260px;
+    height: 100px;
+    border: 1px solid #AAA;
+    border-radius: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="content"]:focus {
     border-bottom: 2px solid #16a085;
     color: #16a085;
     transition: 0.2s ease;

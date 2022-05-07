@@ -1,7 +1,13 @@
 import { Component, NgModule, OnInit } from '@angular/core';
+import { User, user, UserCredential } from '@angular/fire/auth';
 import { Database, set, ref, update, onValue,remove } from '@angular/fire/database';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 
@@ -13,29 +19,53 @@ import { NgForm } from '@angular/forms';
 })
 export class BlogListComponent implements OnInit {
 
+  user$ = this.authService.currentUser$;
+  userId$: any
+
+
+  signUpForm = new FormGroup({
+    title: new FormControl('', Validators.required),
+    content: new FormControl('',  Validators.required),
+    imageUrl: new FormControl('', Validators.required)
+ }) 
+
+
   ngOnInit(): void {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        this.userId$ = user.uid;
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
   }
 
   title = 'firebase-crud-ng';
-  constructor(public database: Database) {
+  constructor(public database: Database, private authService: AuthenticationService) {
   }
 
-  registerUser(value: any) {
-  //  // create data
-  //   set(ref(this.database, 'users/' + value.username), {
-  //     username: value.username,
-  //     first_name: value.first_name,
-  //     profile_picture : value.last_name 
-  //   }); 
-  //   alert('user created!');
+
+  createPost(value: any) {
+   // create data
+    set(ref(this.database, 'blog/' + this.userId$), {
+      title: value.title,
+      content: value.content,
+      imgUrl : value.imgUrl
+    }); 
+    alert('user created!');
 
    // read data
-    const starCountRef = ref(this.database, 'users/' + value.username);
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();  
+    // const starCountRef = ref(this.database, 'users/' + value.username);
+    // onValue(starCountRef, (snapshot) => {
+    //   const data = snapshot.val();  
 
-      alert(data.first_name);   
-    });   
+    //   alert(data.first_name);   
+    // });   
 
   //  // update data
   //   update(ref(this.database, 'users/' + value.username), {
@@ -48,6 +78,7 @@ export class BlogListComponent implements OnInit {
   //   //remove data
   //   remove(ref(this.database, 'users/' + value.username));
   //   alert('removed');
+
   }
 
 }
