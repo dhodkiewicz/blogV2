@@ -1,7 +1,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { User, user, UserCredential } from '@angular/fire/auth';
-import { Database, set, ref, update, onValue,remove } from '@angular/fire/database';
-import { FormsModule } from '@angular/forms';
+import { Database, getDatabase, set, ref, push, update, onValue,remove } from '@angular/fire/database';
+import { FormGroupDirective, FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { AbstractControl, FormControl, FormGroup, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,19 +11,18 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 
+
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.css'],
-  exportAs: '#RegisterForm'
+  exportAs: '#registerForm'
 })
 export class BlogListComponent implements OnInit {
 
   user$ = this.authService.currentUser$;
   userId$: any
-
-
-  signUpForm = new FormGroup({
+  registerForm = new FormGroup({
     title: new FormControl('', Validators.required),
     content: new FormControl('',  Validators.required),
     imageUrl: new FormControl('', Validators.required)
@@ -45,19 +44,29 @@ export class BlogListComponent implements OnInit {
     });
   }
 
-  title = 'firebase-crud-ng';
-  constructor(public database: Database, private authService: AuthenticationService) {
+
+  constructor(public database: Database, private authService: AuthenticationService, private toast: HotToastService) {
+
   }
 
 
-  createPost(value: any) {
+  createPost(value: any, formDirective: FormGroupDirective) {
    // create data
-    set(ref(this.database, 'blog/' + this.userId$), {
+
+  const db = getDatabase();
+  const postListRef = ref(db, 'blog/' + this.userId$);
+  const newPostRef = push(postListRef);
+    set(newPostRef, {
       title: value.title,
       content: value.content,
-      imgUrl : value.imgUrl
+      imageUrl: value.imageUrl
     }); 
-    alert('user created!');
+
+    this.toast.success("blog entry created!");
+    this.registerForm.reset();
+    formDirective.resetForm();
+    
+  }
 
    // read data
     // const starCountRef = ref(this.database, 'users/' + value.username);
@@ -79,6 +88,16 @@ export class BlogListComponent implements OnInit {
   //   remove(ref(this.database, 'users/' + value.username));
   //   alert('removed');
 
+  get title(){
+    return this.registerForm.get('title')
+  }
+
+  get content(){
+    return this.registerForm.get('content')
+  }
+
+  get imageUrl(){
+    return this.registerForm.get('imageUrl')
   }
 
 }

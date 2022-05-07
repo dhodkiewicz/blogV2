@@ -1,10 +1,28 @@
 <div id="login-box">
   <div class="left">
-      <form #RegisterForm="ngForm" (ngSubmit)="createPost(RegisterForm.value)">
+      <form [formGroup]="registerForm" #formDirective="ngForm" (ngSubmit)="createPost(registerForm.value, formDirective)">
           <h1>Create a Blog Post</h1>
-          <input type="text" ngModel id="title" name="title" placeholder="Title" />
-          <input type="textarea" ngModel id="content" name="content" placeholder="content" />
-          <input type="text" ngModel id="imgUrl" name="imgUrl" placeholder="image path will go here" />
+          <mat-form-field>
+            <input matInput placeholder="Title" formControlName="title" />     
+             <mat-error *ngIf="title?.errors?.['required']">
+                Title is required!
+             </mat-error> 
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Content" formControlName="content" type="content"></textarea>   
+                <mat-error *ngIf="content?.errors?.['required']">
+                    Content is required!
+                </mat-error>      
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Image Url" formControlName="imageUrl" type="imageUrl" />    
+                <mat-error *ngIf="imageUrl?.errors?.['required']">
+                    Content is required!
+                </mat-error>      
+            </mat-form-field>
+
           <input type="submit" id="saveData" name="signup_submit" value="Create Blog" />
       </form>
   </div>

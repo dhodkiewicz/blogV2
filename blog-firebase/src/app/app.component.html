@@ -1,5 +1,5 @@
 
-<mat-toolbar color ="primary">
+<mat-toolbar color ="secondary">
   Blog Demo
   
   <ng-container *ngIf="user$ | async as user; else loginButton">
@@ -7,7 +7,7 @@
       <mat-icon>account_circle</mat-icon>
       {{user.displayName}}
       <mat-icon>expand_more</mat-icon>
-  </button>
+    </button>
   </ng-container>
 
 
