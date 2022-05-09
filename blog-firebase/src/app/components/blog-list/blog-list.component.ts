@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Observable } from 'rxjs';
+
 
 
 
@@ -22,6 +24,10 @@ export class BlogListComponent implements OnInit {
 
   user$ = this.authService.currentUser$;
   userId$: any
+
+  blogs: Observable<any[]> | undefined;
+  // this.blogs = db.
+
   registerForm = new FormGroup({
     title: new FormControl('', Validators.required),
     content: new FormControl('',  Validators.required),
@@ -45,8 +51,12 @@ export class BlogListComponent implements OnInit {
   }
 
 
-  constructor(public database: Database, private authService: AuthenticationService, private toast: HotToastService) {
+  constructor(
+    public database: Database,
+    private authService: AuthenticationService,
+    private toast: HotToastService) {
 
+      // this.blogs = db.observable
   }
 
 

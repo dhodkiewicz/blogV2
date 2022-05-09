@@ -7,15 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
@@ -23,6 +23,9 @@ import { LandingComponent } from './components/landing/landing.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { FileComponent } from './components/file/file.component';
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
     HomeComponent,
     LandingComponent,
     BlogComponent,
-    BlogListComponent
+    BlogListComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,
